@@ -300,8 +300,10 @@ function containsSubstring(str, substring) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  const vowelsRegex = /[aeiouyAEIOUY]/g;
+  const matches = str.match(vowelsRegex);
+  return matches ? matches.length : 0;
 }
 
 /**
@@ -413,8 +415,9 @@ function getStringFromTemplate(firstName, lastName) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  const match = value.match(/Hello, (.+?)!/);
+  return match ? match[1] : '';
 }
 
 /**
@@ -428,8 +431,8 @@ function extractNameFromTemplate(/* value */) {
  *   unbracketTag('<span>') => 'span'
  *   unbracketTag('<a>') => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.replace(/^<|>$/g, '');
 }
 
 /**
@@ -467,8 +470,15 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  return str.replace(/[a-zA-Z]/g, (char) => {
+    const isUpperCase = char === char.toUpperCase();
+    const baseCharCode = isUpperCase ? 'A'.charCodeAt(0) : 'a'.charCodeAt(0);
+    const charCode = char.charCodeAt(0);
+    const rotatedCharCode =
+      ((charCode - baseCharCode + 13) % 26) + baseCharCode;
+    return String.fromCharCode(rotatedCharCode);
+  });
 }
 
 /**
